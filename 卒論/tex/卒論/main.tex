@@ -1,0 +1,210 @@
+\documentclass[a4paper,12pt,report]{jsbook}
+%ページに綴じ代をつくる
+\setlength{\textwidth}{38zw}
+\setlength{\oddsidemargin}{0.5cm}
+%小島先輩との変更点は下の定義とページ下のBibtex
+\def\BibTeX{{\rmfamily B\kern-.05em{\scshape i\kern-.025em b}\kern-.08em
+ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125em X}}
+ %共通設定
+\renewcommand{\bibname}{参考文献}
+\renewcommand{\theenumi}{\roman{enumi}}
+\usepackage{makeidx}
+\pagestyle{headings}
+\pagenumbering{roman}
+\usepackage{graphicx}
+\usepackage[fleqn]{amsmath}
+\usepackage{amsthm}
+%\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{newtxtext}
+\usepackage{url}
+\usepackage{here}
+\usepackage{float}
+\usepackage[varg]{newtxmath}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{diagbox}
+\usepackage{booktabs}
+\usepackage{bicaption}
+% 2つ目のキャプションを「Fig.」に設定
+\captionsetup[figure][bi-second]{name=Fig.}
+\captionsetup[table][bi-second]{name=Tab.}
+%\usepackage[dvipdfmx]{hyperref}
+\newcommand{\argmax}{\mathop{\rm argmax}\limits}
+\newcommand{\argmin}{\mathop{\rm argmin}\limits}
+\makeindex
+\begin{document}
+%
+% 表紙
+%
+\begin{titlepage}
+\begin{center}
+{\large 令和6年度卒業論文\\}
+\vspace{2.5cm}
+{\HUGE ビデオビットレート制御関数を用いた他ユーザ使用帯域制限の抑制\\}
+{\huge Suppression of Bandwidth Limitation for Other Users Using Video Bitrate Control Function\\}
+\vspace{3cm}
+{\Large
+  芝浦工業大学 工学部 情報通信工学科\\
+  \vspace{3mm}AF21014 菊地 悠李\\
+  \vspace{2cm}上岡研究室\\
+}%各所にあるvspaceの値を調整して1ページに収まるようにしましょう．
+\end{center}
+\end{titlepage}
+\tableofcontents
+\listoffigures%図のリストを作る
+\listoftables%表のリストを作る（表を全く使わない場合には，この行は削除）
+\newpage
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+%%%%%%%%%%%%%%%%%%%%%%%ここから本文を書きましょう%%%%%%%%%%%%%%%
+%各章毎にファイルを分割して\inputで読み込ませると管理が楽
+\input{chapter1}
+\input{chapter2}
+\input{chapter3}
+\input{chapter4}
+\input{chapter5}
+\input{chapter6}
+\input{chapter7}
+
+\chapter*{謝辞}
+\addcontentsline{toc}{chapter}{謝辞}
+本論文を執筆するにあたり，1年間ご指導いただいた上岡先生に感謝いたします．
+また，貴重なご意見を頂いた東京科学大学の宮田先生並びに山岡先生，大阪大学の黒川先生に感謝いたします．
+そして，1年間，助言や議論をしてくれた先輩方や同期，そして山岡研究室の皆様にも感謝いたします．
+
+\chapter*{付録}
+以下に，.net Winter Workshop 2024で使用した発表資料を付録として添付する．
+
+\begin{figure}[th]
+  \centering
+  \includegraphics[scale=0.45]{1.eps}
+\end{figure}
+
+\begin{figure}[b]
+  \centering
+  \includegraphics[scale=0.45]{2.eps}
+\end{figure}
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[scale=0.45]{3.eps}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[scale=0.45]{4.eps}
+\end{figure}
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[scale=0.45]{5.eps}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[scale=0.45]{6.eps}
+\end{figure}
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[scale=0.45]{7.eps}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[scale=0.45]{8.eps}
+\end{figure}
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[scale=0.45]{9.eps}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[scale=0.45]{10.eps}
+\end{figure}
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[scale=0.45]{11.eps}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[scale=0.45]{12.eps}
+\end{figure}
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[scale=0.45]{13.eps}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[scale=0.45]{14.eps}
+\end{figure}
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[scale=0.45]{15.eps}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[scale=0.45]{16.eps}
+\end{figure}
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[scale=0.45]{17.eps}
+\end{figure}
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[scale=0.45]{18.eps}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{99}
+    \bibitem{kison} T. Yanagisawa, "DASH rate control using game theory to consider user video preference," 
+    Proc. of the 2022 International Conference on Information Networking (ICOIN), pp. 113--118, Jan. 2022, doi:10.1109/ICOIN53446.2022.9687211.
+
+    \bibitem{motomoto} H. Yuan, {\it et al.}, "Non-Cooperative Game Theory Based Rate Adaptation for Dynamic Video Streaming over HTTP," 
+    IEEE Transactions on Mobile Computing, Vol. 17, No. 10, pp. 2334--2348, Oct. 2018.
+
+    \bibitem{okada2011} 岡田章, 『ゲーム理論 新版』, 有斐閣, 2011.
+
+    \bibitem{C.Wang} C. Wang, A. Rizk, and M. Zink, "SQUAD: a spectrum-based quality adaptation for dynamic adaptive streaming over HTTP," in \textit{Proceedings of the 7th International Conference on Multimedia Systems (MMSys '16)}, Klagenfurt, Austria, Association for Computing Machinery, New York, NY, USA, 2016, doi: 10.1145/2910017.2910593.
+
+    \bibitem{Thang} T. C. Thang, Q.-D. Ho, J. W. Kang, and A. T. Pham, "Adaptive streaming of audiovisual content using MPEG DASH," 
+    IEEE Transactions on Consumer Electronics, vol. 58, no. 1, pp. 78--85, Feb. 2012, doi: 10.1109/TCE.2012.6170058.
+
+    \bibitem{Mao} H. Mao, R. Netravali, and M. Alizadeh, "Neural Adaptive Video Streaming with Pensieve," in \textit{Proceedings of the Conference of the ACM Special Interest Group on Data Communication (SIGCOMM '17)}, pp. 197--210, Aug. 2017, doi: 10.1145/3098822.3098843.
+
+    \bibitem{Xu} Y. Xu, Y. Zhou, and D.-M. Chiu, "Analytical QoE Models for Bit-Rate Switching in Dynamic Adaptive Streaming Systems," \textit{IEEE Transactions on Mobile Computing}, vol. 13, no. 12, pp. 2734--2748, Dec. 2014, doi: 10.1109/TMC.2014.2307323.
+
+    \bibitem{johari} R. Johari and J. N. Tsitsiklis, "A Game Theoretic View of Efficiency Loss in Resource Allocation," in \textit{Advances in Control, Communication Networks, and Transportation Systems: In Honor of Pravin Varaiya}, E. H. Abed, Ed., Boston, MA: Birkhäuser Boston, 2005, pp. 203--223, doi: 10.1007/0-8176-4409-10-12.
+
+    \bibitem{cisco2018} Cisco Systems, "Cisco Annual Internet Report (2018–2023)," Cisco White Paper, pp. 1--147, 2020.
+
+    \bibitem{Y.Huang} Y. Huang, W. Zhou, and Y. Du, "A study on the user behavior-based QoE evaluation method for HTTP mobile streaming," in \textit{Proceedings of the 9th International Conference on Broadband and Wireless Computing, Communication and Applications (BWCCA '14)}, Guangdong, China, 2014, pp. 47–51, doi: 10.1109/BWCCA.2014.14.
+\end{thebibliography}
+
+
+\end{document}
+
+
+
+
+
+
+
+

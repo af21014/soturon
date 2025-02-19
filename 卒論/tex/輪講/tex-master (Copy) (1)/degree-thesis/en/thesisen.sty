@@ -1,0 +1,192 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% LaTeX Style for Thesis or Dissertation written in English
+%% 2020.01.13 Yamaoka-Kitaguchi Lab.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{pxjahyper}
+\usepackage{setspace}
+\usepackage{titlesec}
+
+\makeatletter
+
+\newcommand{\MyTitleA}[1]{\newcommand{\@MyTitleA}{#1}}
+\newcommand{\MyTitleB}[1]{\newcommand{\@MyTitleB}{#1}}
+\newcommand{\MyTitleC}[1]{\newcommand{\@MyTitleC}{#1}}
+\newcommand{\MyName}[1]{\newcommand{\@MyName}{#1}}
+\newcommand{\MySupervisor}[1]{\newcommand{\@MySupervisor}{#1}}
+\newcommand{\MyDegreeType}[1]{\newcommand{\@MyDegreeType}{#1}}
+\newcommand{\MonthYear}[1]{\newcommand{\@MonthYear}{#1}}
+
+\newcommand{\@PaperType}{
+\if \@MyDegreeType D A Dissertation \fi
+\if \@MyDegreeType M A Thesis \fi
+\if \@MyDegreeType B A Thesis \fi
+}
+
+\newcommand{\@Degree}{
+\if \@MyDegreeType D Doctor \fi
+\if \@MyDegreeType M Master \fi
+\if \@MyDegreeType B Bachelor \fi
+}
+
+\newcommand{\LeftBinding}[1]{\newcommand{\@LeftBinding}{#1}}
+
+\newcommand{\@LMargin}{
+\if \@LeftBinding Y 38mm \fi
+\if \@LeftBinding N 30mm \fi
+}
+
+\newcommand{\@RMargin}{
+\if \@LeftBinding Y 22mm \fi
+\if \@LeftBinding N 30mm \fi
+}
+
+\newcommand{\makepagestyle}{
+\newgeometry{top=35mm,right=\@RMargin,bottom=35mm,left=\@LMargin}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+}
+
+\renewcommand{\maketitle}{
+\begin{titlepage}
+\setcounter{page}{-1}
+\pagestyle{empty}
+\newgeometry{top=35mm,right=\@RMargin,bottom=30mm,left=\@LMargin}
+\begin{center}
+
+\begin{figure}[h]
+\center
+\includegraphics[height=20mm]{./titech.jpg}
+\end{figure}
+\fontsize{16pt}{0mm}\selectfont
+{\rm Tokyo Institute of Technology}
+\vspace{13mm}
+
+\fontsize{22pt}{0mm}\selectfont
+\hrule height 1pt\hfill \\
+\vspace{9mm}
+\ifx \@MyTitleB \undefined
+\vspace{12mm}
+{\bf \@MyTitleA}
+\vspace{12mm}
+\else{
+\ifx \@MyTitleC \undefined
+\vspace{5mm}
+{\bf \@MyTitleA} \\
+\vspace{5mm}
+{\bf \@MyTitleB}
+\vspace{5mm}
+\else
+{\bf \@MyTitleA} \\
+\vspace{5mm}
+{\bf \@MyTitleB} \\
+\vspace{5mm}
+{\bf \@MyTitleC}
+\fi
+}\fi
+\vspace{9mm}
+\hrule height 1pt\hfill \\
+\vspace{13mm}
+
+\fontsize{13pt}{0mm}\selectfont
+{\rm by} \\
+\vspace{3mm}
+\fontsize{18pt}{0mm}\selectfont
+{\bf \@MyName} \\
+\vspace{4mm}
+\fontsize{13pt}{0mm}\selectfont
+{\rm Supervisor:} \\
+\vspace{3mm}
+\fontsize{18pt}{0mm}\selectfont
+{\bf Prof. \@MySupervisor} \\
+\vspace{13mm}
+
+\fontsize{12pt}{0mm}\selectfont
+{\rm \@PaperType Presented to} \\
+\vspace{5mm}
+\fontsize{16pt}{0mm}\selectfont
+{\rm Department of Information and Communications Engineering} \\
+\vspace{3mm}
+{\rm School of Engineering} \\
+\vspace{5mm}
+\fontsize{12pt}{0mm}\selectfont
+{\rm In Partial Fulfilment of} \\
+\vspace{3mm}
+{\rm the Requirements for the Degree of} \\
+\vspace{5mm}
+\fontsize{16pt}{0mm}\selectfont
+{\sl \@Degree of Engineering} \\
+\vspace{13mm}
+\fontsize{15pt}{0mm}\selectfont
+{\rm \@MonthYear}
+
+\end{center}
+\restoregeometry
+\end{titlepage}
+}
+
+\setstretch{1.4}
+\renewcommand\arraystretch{1.3}
+
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\setstretch{1.1}}
+  {Chapter \thechapter}
+  {1pt}
+  {\vspace{2ex}}
+  [{\titlerule[0.2pt]}]
+
+\renewcommand{\cftchappresnum}{Chapter }
+\renewcommand{\cftchapaftersnum}{:}
+\renewcommand{\cftchapnumwidth}{6em}
+\renewcommand{\cftchapdotsep}{2}
+\renewcommand{\cftsecdotsep}{2}
+\renewcommand{\cftsubsecdotsep}{2}
+
+\renewcommand{\cftfigpresnum}{Figure }
+\renewcommand{\cftfigaftersnum}{:}
+\renewcommand{\cftfignumwidth}{6em}
+\renewcommand{\cftfigdotsep}{2}
+
+\renewcommand{\cfttabpresnum}{Table }
+\renewcommand{\cfttabaftersnum}{:}
+\renewcommand{\cfttabnumwidth}{6em}
+\renewcommand{\cfttabdotsep}{2}
+
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyhead[R]{\thepage}
+  \renewcommand\headrulewidth{0.4pt}
+}
+
+\captionsetup[figure]{
+  labelfont={bf},
+  labelformat={default},
+  labelsep=colon,
+  name={Figure}
+}
+\captionsetup[table]{
+  labelfont={bf},
+  labelformat={default},
+  labelsep=colon,
+  name={Table}
+}
+
+\hypersetup{
+  setpagesize=false,
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=black
+}
+
+\makeatother

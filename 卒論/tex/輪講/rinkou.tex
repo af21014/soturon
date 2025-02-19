@@ -1,0 +1,434 @@
+\documentclass[rinkou,a4paper,uplatex]{ieicej}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{paralist}
+
+\usepackage{ascmac}
+\usepackage{fancybox}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{comment}
+\usepackage{amsmath} % 数学記号のサポート
+\usepackage{amsfonts} % 数学フォント
+\usepackage{mathrsfs} % \mathscr を使用するため
+\usepackage{diagbox}%表
+\usepackage{array} % 追加する必要があります
+\usepackage{tabularx} % 必ず使用する必要があります
+
+
+% UserSetting
+\newenvironment{narrow}{\baselineskip=3mm}
+
+\setcounter{page}{1}
+\vol{107}%year
+\no{05}%month
+\day{13}%day
+
+\jtitle{ゲーム理論を用いたレート制御について}%title
+\jsubtitle
+\authorlist{
+ \authorentry{菊地 悠李}{Yuri KIKUCHI}{}
+} \vspace{-3mm}
+\begin{document}
+
+\maketitle
+
+\section{はじめに}
+インターネットの使用が増加し，特に，ビデオに関するトラヒックがここ数年指数関数的に増えている．
+動的なネットワーク上で動的にビットレートを選択することが出来るMPEG-DASHの利用が高まっているが，DASH自体にはゲーム理論を用いた研究は存在するものの\cite{2}，ユーザの動画の好みまでを考慮したレート適応アルゴリズムは存在しなかった．そこで，これまでにユーザの動画の好みを考慮し，ゲーム理論を用いたレイト制御方式が提案されている \cite{1}
+本輪講では，上記の既存手法を参考にし，ゲームを用いてユーザの動画に対する好みを考慮しながらレートを決定し，QoEを向上させる好みを考慮する手法を紹介し，卒業研究の内容候補について考察を行う．
+
+今後，これから紹介する柳沢先輩の研究を好みを考慮する手法\cite{1}，その柳沢先輩の研究の基盤となっている研究を好みを考慮しない手法\cite{2}と呼び，比較を行っていく．
+
+また，今回使用している数式の変数などはすべて７章の変数表一覧に記載している．
+
+\section{目的}
+
+好みを考慮する手法の目的は，非協力ゲーム理論を用いて，レートを早く安定させ，ユーザの動画に対する好みを考慮しレートを制御する．
+現状で卒業研究では，二つの方向性を考えている．
+・ 動画の種類を考慮
+好みを考慮する手法では，ユーザが同じ動画を視聴したときのそれぞれのユーザの偏好性を考慮したものであったため，それぞれが別々の動画を視聴した場合の解析．
+・ ユーザの動画スキップの考慮
+一般的には，動画スキップ時に発生するリバッファリングはトラヒック量が急激に変化するにも関わらず，好みを考慮する手法では，これらの項目を考慮していないため，リバッファリングを考慮した方式を解析．
+
+
+
+\section{好みを考慮する手法について}
+
+QoEに着目した方法にゲーム理論と劣勾配法を使用したもの(好みを考慮しない手法とする)がある．
+しかし，劣勾配法では選択したレートが安定するまでに時間がかかるため，QoEが低下する可能性がある．
+また，ユーザが好むビデオの種類がQoEに影響を与えるのに対し，ユーザの好みを考慮していない
+好みを考慮しない手法には，以上２つの問題点がある．
+よって好みを考慮する手法の研究ではこれらの問題に対し，ゲーム理論を用いた手法を提案した．
+
+目的
+
+1.すばやく安定してレート決定する
+
+2.ユーザの動画に対する好みを考慮する
+
+以上二つを達成できるゲーム理論を提案する．
+
+\subsection{用いたゲーム理論について}
+  非協力ゲーム理論は，各プレイヤーが自身の利益を最大化するために自己中心的に行動するゲームにおいて相互作用するプレイヤー間の対立を解決できる．
+
+  今回用いる非協力ゲームを次のような式で表すことができる．
+  
+ゲーム理論の式
+\begin{equation}
+G:= (\mathscr{N},\{{\mathscr{R}_i}\}_{i\in \mathscr{N}} ,\{{f_{i}}\}_{i\in \mathscr{N}})
+\end{equation}
+N（プレイヤー）:ユーザ（視聴者(4人)）
+
+$R_i$(戦略)：要求可能レートベクトル(21種のレート)
+
+$f_i$(利得関数):レートを選択する利得関数
+
+i:i番目のユーザ（視聴者）
+
+レートの安定性とユーザの好みを考慮した利得関数で最適なレートを決定する．
+
+\subsection{利得関数とは}
+
+\subsection{レートの安定性}
+レートの安定性とは画質が毎回大きく変動してしまうと、ユーザがイライラしたりする。
+
+好みを考慮しない手法では，ゲーム理論で最適なレートを決定し，劣勾配法を用いてレートの安定性を図る．
+
+好みを考慮しない手法で提案されている手法（ゲーム理論＋劣勾配法）
+
+利得関数
+\begin{equation}
+ f_{i}=\underbrace{q_{i}(r_{i,k})}_{(A)}+\underbrace{\mu\Delta{b^{\rm{est}}_{i,k}}(r_{i,k},\mathbf{r}_{-i,k})}_{(B)}
+\end{equation}
+用いている劣勾配法の式
+\begin{equation}
+ r_i(k+1)=r_i(k)+θ_ir_i(k)\frac{d(U_
+ i(\mathbf{r}))}{d(r_i(k))}
+\end{equation}
+対して，好みを考慮する手法の利得関数は
+\begin{equation}
+f_{i}=\underbrace{q_{i}(r_{i,k})}_{(\rm{A})}+\underbrace{\mu\Delta{b^{\rm{est}}_{i,k}}(r_{i,k},\mathbf{r}_{-i,k})}_{(\rm{B})}+\underbrace{\gamma_i{R}_{\rm{f}}(r_{i,k})}_{(\rm{C})}
+ \end{equation}
+ 
+で表される．
+
+
+\subsubsection{Aの項}
+$r_i,k$から得られるビデオ品質を表す．
+
+${q_{i}(r_{i,k})}=α_{ct}log(1+|β_{ct}|r_{i,k})$
+
+
+\subsubsection{Bの項}
+k番目のセグメントで$r_{i,k}$が選択されたときのユーザiの推定バッファ変動を表している．
+
+この項でバッファアンダーラン（バッファ枯渇）を防ぐ．
+
+好みを考慮しない手法
+
+${\mu\Delta{b^{\rm{est}}_{i,k}}(r_{i,k},\mathbf{r}_{-i,k})}$
+
+$=\underbrace{\mu(2\frac{e^{p(b_{i,k-1}-b_s)}}{1+e^{p(b_{i,k-1}-b_s)}}Tr_{i,k})}_{(\rm{B.1})}$
+
+$-\underbrace{\mu\omega{T}(\frac{\frac{r_{i,k}^2}{2}+r_{i,k}\sum^{N}_{i=1,l\ne{i}}r_{l,k}}{B_W})}_{(\rm{B.2})}$
+
+$+\underbrace{\mu{b_0}}_{(\rm{B.3})}$
+
+好みを考慮する手法
+
+${\mu\Delta{b^{\rm{est}}_{i,k}}(r_{i,k},\mathbf{r}_{-i,k})}$
+
+$=\underbrace{\mu(2\frac{e^{p(b_{i,k-1}-b_s)}}{1+e^{p(b_{i,k-1}-b_s)}}Tr_{i,k})}_{(\rm{B.1})}$
+
+$-\underbrace{\mu\omega{T}(\frac{r_{i,k}^2+r_{i,k}\sum^{N}_{i=1,l\ne{i}}r_{l,k}}{B_W})}_{(\rm{B.2})}$
+
+k番目のセグメントで$r_{i,k}$が選択されたときのユーザiの推定バッファ変動はダウンロードされたビデオセグメント長Tによる累積バッファ長（バッファに貯蓄されるデータ量）ーダウンロード時間中に再生されたビデオによって消費されるバッファ長との差である．
+
+B.1式：ダウンロードされたビデオセグメント長Tによる累積バッファ長を表している．
+
+B.2式：すべてのユーザの要求されたビットレートによって引き起こされるバッファ消費量
+
+B.3式：$b_0$は定数であり，すべてのユーザの初期平均バッファ長
+
+\subsubsection{劣勾配法とCの項の比較}
+
+この項ではレートの安定性を保つための役割を果たす．
+
+・好みを考慮しない手法
+
+  劣勾配法
+
+$r_i(k+1)=r_i(k)+θ_ir_i(k)\frac{dU_i(\mathbf{r})}{dr_i(k)}$
+
+今回選択したレートで定まる勾配の正負によって，次のレートの値を利得が増えるようなレート値になるよう計算しておくことで，今回と次回のレート差が大きくならず，利得がふえるようにしている．
+
+しかし、スループットや帯域幅など変動するネットワーク条件を考慮して、最適レートを決定するため、予測したレートの値で利得が増加するとは限らず、ほかのレート値でも再度計算する必要があるため、時間がかかる。
+
+また、劣勾配法では二人以上のレートの安定性分析は，非常に複雑になる．
+
+
+・好みを考慮する手法
+
+ Cの項
+ 
+${\gamma_i*f_{stability}(r_{i,k})}=\gamma_i(-m(r_{i,k}-r_{i,k-1}+r^{(J)})^{-2}2^{-m(r_{i,k}-r_{i,k-1})})$
+
+$r_{i,k}$と$r_{i,k-1}$の差が大きくなるほど式の値が小さくなる．
+
+これは利得が低くなることと同等であり，この関数ではk−1番目のレートとk番目のレートの差が増加しないようにレート決定を行うことで，レートの安定性を保っている．
+
+利得関数内で安定性を保つレートを決定しようとしているため、劣勾配法を用いるより計算の反復が少なく、早くレートが安定しやすい。
+
+\subsubsection{時間におけるレートの変化(安定性の確認)}
+
+ユーザ数：4人
+
+利用可能帯域幅：20Mbps,
+
+要求可能レート＝0.1 Mbps ~ 6.0 Mbps で 21 個
+
+セグメント長：2s
+
+4分の動画を視聴した場合における好みを考慮したゲーム理論式と好みを考慮しない手法のゲーム理論式のみで，レートの安定性（早く高レートを維持できるか）を比較する．
+※好みを考慮しない手法では，劣勾配法は二人以上のユーザ時，非常に複雑な式になるためゲーム理論のみで安定性が保てるかの比較を行う．
+
+好みを考慮しない手法
+\begin{figure}[hh]
+\centering
+\includegraphics[scale=0.3]{anteisei_retu.eps}
+\caption{レート安定性}
+\end{figure}
+
+好みを考慮する手法
+\begin{figure}[hh]
+\centering
+\includegraphics[scale=0.3]{annteisei_C.eps}
+\caption{レート安定性}
+\end{figure}
+
+上記のグラフでは，i番目のユーザのセグメントごとにおける決定されたレート値が，どのように変動しているか，レートの安定性を表している．
+好みを考慮しない手法（ゲーム理論のみ）では，初めに得られたレートが安定しないため変動差が大きくなり，その後，常に低レートを選択し続けているところからレートの安定性は保てていないことが分かる．
+好みを考慮する手法では，レートの変動差は好みを考慮しない手法と比較すると大きくないことが分かる．また，どのユーザも高レート帯を選択し続けているため，レートを安定的に選択し続けられているということが分かる．
+よって，好みを考慮する手法であるゲーム理論にレート安定性を確保するための関数はうまく機能しているといえる．
+
+\subsection{偏好性}
+\subsubsection{好み係数tiについて}
+\begin{equation}
+t_i=\frac{1}{J}\sum_{j=1}^{J}\left\{\frac{Q^{\text{preference}}_i(r^{(j)})}{Q_{\text{mean}}(r^{(j)})}\right\}
+\end{equation}
+\begin{equation}
+Q^{\text{preference}}_i(r^{(j)}) =
+\begin{cases} 
+    \text{ Strong interest}, \\
+    \alpha^{\text{P}}_{i,c} \log(r^{(j)}) + \beta^{\text{P}}_{i,c} \\
+    \text{ weak interest}, \\
+    \alpha^{\text{NP}}_{i,c} \log(r^{(j)}) + \beta^{\text{NP}}_{i,c}
+\end{cases}
+\end{equation}
+
+ユーザの動画に対する好みや興味の度合いを反映したQoE（ビデオ品質）を表す．
+
+特定のレートでビデオが再生されたときに好みを考慮したビデオ品質．
+
+Pを興味が強いユーザ，NPを興味が弱いユーザとしている
+
+\begin{equation}
+Q_{\text{mean}}(r^{(j)}) = \alpha_c \log(r^{(j)}) + \beta_c
+\end{equation}
+
+ユーザの動画に対する興味，関心を考慮していない平均的なQoEを表す．
+
+特定のレートでビデオが再生されたときのビデオ品質．
+
+以上から，tiは各レートにおいてユーザの好みを考慮しビデオ再生した場合のQoE比を平均化したものである．
+このtiを提案している利得関数に組み込む．
+\begin{equation}
+ f_{i}=\underbrace{t_{i}q_{i}(r_{i,k})}_{(\rm{A})}+\underbrace{\mu\Delta{b^{\rm{est}}_{i,k}}(r_{i,k},\mathbf{r}_{-i,k})}_{(\rm{B})}+\underbrace{\gamma_i{R}_{\rm{f}}(r_{i,k})}_{(\rm{C})}.
+\end{equation}
+
+tiはユーザの動画に対する好みや興味の度合いであるため，ビデオ品質におけるQoEを表すAの項に係る．
+
+\subsubsection{好みを考慮したときのゲームの変化（利得関数から得られる値の変化）}
+実際にレートを選択したときにこの利得関数がどのような値をとり，どのようなゲームとなるか．
+tiを含める前と含めた後での利得関数の値を比較する．
+
+二人ユーザ（A,B（好み係数を含める場合は，A：好き，B：嫌いとする））
+
+利用可能帯域幅Bw：10Mbps
+
+選択可能レート=0.1Mbps(低レート) または 6.0Mbps(高レート)
+
+\begin{table}[hh]
+  \begin{tabular}{|c|c|c|} \hline
+    \diagbox{ユーザA}{ユーザB} & 低レート & 高レート \\ \hline
+    低レート & (-0.13  , -0.13)  & (29.17  ,  -0.6) \\ \hline
+    高レート & (-0.6  ,  29.18) & (1.42  ,  1.42) \\ \hline
+  \end{tabular}
+  \caption{tiを含める前の利得関数のとる値}
+  \label{tb:slash}
+  \begin{tabular}{|c|c|c|} \hline
+    \diagbox{ユーザA(好き)}{ユーザB(嫌い)} & 低レート & 高レート \\ \hline
+    低レート & (0.14 ,  -0.63)  & (29.55  ,  -1.1)\\ \hline
+    高レート & (-0.33  ,  28.44) & (1.79  ,  0.7) \\ \hline
+  \end{tabular}
+  \caption{tiを含めた利得関数のとる値}
+  \label{tb:slash}
+\end{table}
+
+\subsubsection{好みを反映させるtiの性能評価}
+
+ユーザ数：4人
+
+利用可能帯域幅：20Mbps,
+
+要求可能レート＝0.1 Mbps ~ 6.0 Mbps で 21 個
+
+セグメント長：2s
+
+4分の動画を視聴した場合におけるユーザの好みを考慮した場合のレートから得られたQoEと考慮しない場合のレートから得られたQoEを比較する．
+
+4人ユーザのうち視聴する動画に対して関心があるユーザとそうでないユーザのパターンを分ける．
+
+A：興味あり２人，興味なし２人 図3
+
+B：興味あり3人，興味なし1人  図4
+
+C：興味あり1人，興味なし3人 図5
+
+それぞれのパターンで好みを考慮した場合としない場合のQoEを比較する．
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{P2N2.eps}
+\caption{A：興味あり２人，興味なし２人}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[scale=0.25]{P3N1.eps}
+\caption{B：興味あり3人，興味なし1人}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{P1N3.eps}
+\caption{C：興味あり1人，興味なし3人}
+\end{figure}
+
+\newpage
+〇が好みを考慮した場合におけるQoEの平均値である．
+
+*が好みを考慮しなかった場合のQoEの平均値である．
+
+A～Cの3パターンすべてで，好みを考慮した方が平均QoE値が高くなることが分かる．
+また，A～Cの3パターンで動画に対して興味があるユーザの平均QoEは，興味がないユーザの平均QoEより高くなっていることが分かる．
+よって，好みを考慮したゲーム理論の方がQoEが向上した．
+
+\subsection{QoE評価式}
+
+好みを反映させるtiの性能評価において，評価軸となったQoE評価式は以下のように表される．\cite{3}
+\begin{equation}
+Q_i=\frac{1}{K}(\underbrace{\sum_{k=1}^{K}q(r_{i,k})}_{(\rm{9.1})}
+-\underbrace{\sum_{k=2}^{K}ε\frac{|r_{i,k}-r_{i,k-1}|}{r_{i,k}}}_{(\rm{9.2})}
+-\underbrace{\sum_{k=1}^{K}ηf(T_f[k])}_{(\rm{9.3})})
+\end{equation}
+
+今回の分析では，全てのセグメントを取得した時点のQoEのみを評価する(早期離脱時を考えていないということ)
+以下3つの観点からQoEを評価した．
+
+(9.1)式：動画の画質に対するユーザ満足度
+
+$
+\sum_{k=1}^{K}q(r_{i,k})=$
+
+$ \sum^{K}_{k=1}（\begin{cases}
+    \alpha^{\rm{P}}_{i,c}\log(r_{i,k})+\beta^{\rm{P}}_{i,c}
+    \ (\rm{Strong\ interest})\\
+    \alpha^{\rm{NP}}_{i,c}\log(r_{i,k})+\beta^{\rm{NP}}_{i,c}
+    \ (\rm{Weak\ interest}).\\
+  \end{cases})
+$
+
+ユーザの動画に対する好みや興味の度合いを反映したQoE（ビデオ品質）を表す．
+特定のレートでビデオが再生されたときに好みを考慮したビデオ品質．
+
+(9.2)式：動画の画質変動
+
+${\sum_{k=2}^{K}ε\frac{|r_{i,k}-r_{i,k-1}|}{r_{i,k}}}$
+
+k番目のセグメントとk-1番目のセグメントのレートの差をk番目のセグメントのレートで割ることでk番目のセグメントのレートの変動率を表す．
+
+(9.3)式：再生停止によるQoEの劣化
+
+$\sum_{k=1}^{K}ηf(T_f[k])=\sum_{k=1}^{K}η\frac{e^{(-a+bT_f[k])}}{1+e^{(-a+bT_f[k])}}$
+
+
+\section{おわりに}
+
+今後は，ユーザの利得が上がる原因として様々な要素が絡むため，利得関数の特性を解析し，使用しているゲーム理論の特性を理解する．
+2つの方向性に関して、複数動画視聴時の好みの考慮をした場合の解析では、式(6),
+(7)のαとβそれぞれの値を動画のジャンルによって変化させることで解析できるのではないかと考えている。しかし、αとβの値がどのように設定されているかわかっていないため、文献を読み調査する。
+動画スキップ時に関してもスキップ時の評価方法を文献で調査していこうと考えている。
+
+\newpage
+\section{変数一覧表}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}} % 左寄せの列を定義
+\begin{table}[h]
+\centering
+\scalebox{0.87}{% スケールコマンドの開始
+\begin{minipage}{1.25\textwidth} % scalebox内でminipageを使い，表のサイズを調整
+	\caption{変数の説明}
+	\label{mytbl}
+ \begin{tabularx}{\textwidth}{L{3em}X} % L{3em} と X を使用
+    変数 & 意味  \\ \hline
+    $N$ & ユーザ数  \\
+    $R_i$ & 要求可能レートベクトル  \\
+    $f_i$ & レートを選択する利得関数  \\
+    $i$ & i番目のユーザ  \\
+    $k$ & k番目のセグメント  \\
+    $K$ & セグメント総数  \\
+    $r_{i,k}$ & i番目のユーザのk番目のセグメントのレート  \\
+    $\alpha_{ct}, \beta_{ct}$ & 再生可能な動画ジャンルの種類の集合$\mathcal{C}$の要素 動画のジャンルによって変わる値\\
+    $\mu$ & 利得関数内でAの項とBの項のバランスをとるための重みづけ$\mu>0$ \\
+    $T$ & セグメント長  \\
+    $B_w$ & サーバーの輸出帯域幅\\
+    $b_{i,k-1}$ &i番目のユーザのk番目のセグメントにおけるバッファ量（現時点でのバッファ量）\\
+    $bs$ & 参照バッファ量（基準とするバッファ量）\\
+    $p$ & 式の感度\\
+    $\omega$ & 実際のダウンロード時間と理想のダウンロード時間の比例関数\\
+    $\theta_i$ & ユーザiの学習率 \\
+    $\frac{dU_i(\mathbf{r})}{dr_i(t)}$ & 利得関数の偏微分 \\
+    $\gamma_i$ & 重み係数 \\
+    $m$ & レート変化のペナルティを強化するための係数．$m>0$ \\
+    $r(J)$ & 最後の送信ラウンド前までの総送信時間 \\
+    $t_i$ \\& 要求可能レート数(21)DASHで用意されているレートの高さのレベルを表す添え字 \\
+    $Q^{preference}_i$ \\& ユーザの動画に対する好みや興味の度合いを反映したQoE（ビデオ品質）を表す \\
+    $\alpha^P_{i,c}, \alpha^{NP}_{i,c}, \beta^P_{i,c}, \beta^{NP}_{i,c}$\\ & ユーザの好みと動画ジャンル$c$によって定まる値 \\
+    $\epsilon$ & 重み付け係数(＝5) \\
+    $\eta$ & 重み付け係数(＝8) \\
+    $a, b$ & 1 \\
+    $T_f[k]$ & k-1番目のセグメントの視聴中の再生停止時間 
+  \end{tabularx}
+\end{minipage} % minipageの終了
+} % scaleboxの終了
+\end{table}
+
+
+\begin{thebibliography}{9} % 文献数が10未満の時 {9}文献数が10以上の時 {99}
+\bibitem{1}
+ T. Yanagisawa, "DASH rate control using game theory to consider user video preference," in Proc. of the 2022 International Conference on Information Networking (ICOIN), Jeju-si, Korea, Republic of, Jan. 12-15, 2022, pp. 113-118, doi: 10.1109/ICOIN53446.2022.9687211.
+\bibitem{2}
+H. Yuan, H. Fu, J. Liu, J. Hou, S. Kwong, "Non-Cooperative Game Theory Based Rate Adaptation for Dynamic Video Streaming over HTTP," in IEEE Transactions on Mobile Computing, vol. 17, no. 10, pp. 2334-2348, Oct. 2018, doi: 10.1109/TMC.2018.2800749.
+\bibitem{3}
+ R. Sakamoto, T. Shobudani, R. Hotchi, R. Kubo, "QoE-Aware Stable Adaptive Video Streaming Using Proportional-Derivative Controller for MPEG-DASH," IEICE Transactions on Communications, vol. E104-B, no. 3, pp. 286-294, Mar. 2021, doi: 10.1587/transcom.2020EBP3038.
+\bibitem{4}
+ 岡田章, "Game Theory," 有斐閣, 2011.
+ 
+\end{thebibliography}
+
+
+
+\end{document}

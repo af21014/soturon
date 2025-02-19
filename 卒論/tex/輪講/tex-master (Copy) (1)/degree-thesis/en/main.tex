@@ -1,0 +1,147 @@
+\documentclass[oneside,onecolumn,12pt]{report}
+\bibliographystyle{IEEEtran}
+
+% Include first: order-sensitive packages
+\usepackage[dvipdfmx]{graphicx,xcolor,hyperref}
+\usepackage{ascmac}
+
+% English font (Use Latin Modern instead of Computer Modern)
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{caption}
+\usepackage{cite}
+\usepackage{comment}
+\usepackage{fancybox}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{latexsym}
+\usepackage{layout}
+\usepackage{multirow}
+\usepackage{nidanfloat}
+\usepackage{paralist}
+\usepackage{pifont}
+\usepackage{pxjahyper}
+\usepackage{tabularx}
+\usepackage{tocloft}
+\usepackage{url}
+
+% For thesis written in English
+\usepackage{thesisen}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Personal Settings
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% See: http://hurou927.hatenablog.com/entry/2015/06/25/142126
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+
+% Python-like pseudocode
+\algrenewcommand\algorithmicrequire{\textbf{Input:}}
+\algrenewcommand\algorithmicensure{\textbf{Output:}}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\Break}{\textbf{break}}
+\renewcommand{\Return}{\textbf{return }}
+\makeatletter\renewcommand*{\ALG@name}{Algorithm}\makeatother
+\algtext*{EndFunction}
+\algtext*{EndWhile}
+\algtext*{EndFor}
+\algtext*{EndIf}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Contents of This Thesis
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% \layout  % For debugging page layout
+
+\MyTitleA{Answer to the Ultimate Question}
+\MyTitleB{of}
+\MyTitleC{Life, the Universe, and Everything}
+\MyName{Taro SHURON}
+\MySupervisor{Katsunori YAMAOKA}
+\MyDegreeType{M}
+\MonthYear{January 2020}
+
+% Left binding support
+%   Y: Margin left=38mm, right=22mm (for bookbinding)
+%   N: Margin left=30mm, right=30mm (for PDF export)
+\LeftBinding{N}
+
+\maketitle
+\makepagestyle  % Set style for thesis
+
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\addcontentsline{toc}{chapter}{Abstract}
+\input{chapters/02_abstract}
+\clearpage
+
+\addcontentsline{toc}{chapter}{Acknowledgement}
+\input{chapters/05_acknowledgement}
+\clearpage
+
+\setcounter{tocdepth}{2}
+
+\addcontentsline{toc}{chapter}{Table of Contents}
+\tableofcontents
+\clearpage
+
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+\clearpage
+
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+\clearpage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{chapters/10_introduction}
+\clearpage
+
+\input{chapters/20_relatedwork}
+\clearpage
+
+\input{chapters/30_model}
+\clearpage
+
+\input{chapters/40_proposedmethod}
+\clearpage
+
+\input{chapters/50_evaluation}
+\clearpage
+
+\input{chapters/60_conclusion}
+\clearpage
+
+\setstretch{1.2}
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliography{library.bib}
+\clearpage
+
+\pagenumbering{roman}
+\setcounter{page}{8}
+
+\addcontentsline{toc}{chapter}{Colophon}
+\input{chapters/99_colophon}
+\clearpage
+
+\end{document}

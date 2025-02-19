@@ -1,0 +1,114 @@
+\documentclass[rinkou,a4paper]{ieicej}
+
+%% Default packages
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[hyphens]{url}
+\usepackage{ascmac}
+\usepackage{fancybox}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{comment}
+
+%% Optional packages: uncomment below packages as needed
+% \usepackage{algorithm}
+% \usepackage{algpseudocode}
+\usepackage{bbding}
+% \usepackage{cite}
+% \usepackage{listings}
+% \usepackage{float}
+% \usepackage{nidanfloat}
+% \usepackage{paralist}
+% \usepackage{nidanfloat}
+\usepackage{tabularx}
+% \usepackage{setspace}
+
+\usepackage{bxtexlogo}  % Added only for using \upLaTeX command
+
+%% Global settings
+\setcounter{page}{1}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\renewcommand\thesubsubsection{\thesubsection.\arabic{subsubsection}}
+
+\jtitle{輪講資料テンプレ・改}
+
+\authorlist{
+ \authorentry{輪講 太郎}{Taro RINKOU}{}
+} \vspace{-3mm}
+
+\vol{103}		% Year: set years elapsed from 1917 (103 = 2020 - 1917)
+\no{07}  		% Month
+\day{25} 		% Day
+
+\begin{document}
+\maketitle
+
+\section{はじめに}
+輪講資料テンプレート・改です．
+オリジナルは，電子情報通信学会の和文誌クラスファイル(\texttt{ieicej.cls})をもとに，酒井研究室時代に作成されました．
+\textbf{本テンプレートは \pLaTeX に代わり \upLaTeX で動作するよう追加改修を行ったものになります．}
+最終アップデートは2020年7月25日です.
+
+\section{使い方}
+\texttt{rinkou.tex} の上部を編集します．
+タイトルと氏名を変更した後，輪講の実施年月日を
+\begin{itemize}
+ \item \texttt{\textbackslash vol\{YYYY-1917\}}
+ \item \texttt{\textbackslash no\{MM\}}
+ \item \texttt{\textbackslash day\{DD\}}
+\end{itemize}
+にそれぞれ埋め込んでください．
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=50mm]{./tech-chan.png}
+	\caption{テックちゃん（工大祭公式マスコットキャラクター）}
+	\label{myfig}
+\end{figure}
+
+参考文献\cite{myjournal}は\texttt{\textbackslash cite\{label\}}で，
+図\ref{myfig}や表\ref{mytbl}は\texttt{\textbackslash ref\{label\}}で参照できます．
+各ラベルはユニークな限り自由に設定できます．
+図のタイトルは下部に，表のタイトルは上部につけてください．
+
+\begin{table}[t]
+	\centering
+	\caption{研究室Wi-FiとIPv4/IPv6インターネット接続性}
+	\label{mytbl}
+  \begin{tabularx}{70mm}{LCC}
+    Wi-Fi (ESSID) & IPv4 & IPv6 \\ \hline
+    labo301 & \Checkmark & \Checkmark \\
+    labo301-v6only & \textbf{--} & \Checkmark \\
+    labo301-eap-sim & \Checkmark & \Checkmark \\
+    labo301-mgmt & \Checkmark & \textbf{--} \\
+  \end{tabularx}
+\end{table}
+
+\begin{thebibliography}{9} % 文献数が10未満の時 {9}　　文献数が10以上の時 {99}
+\bibitem{myjournal}
+	T. Rinkou, ``Hogehoge,'' IEICE Transaction on Communications, vol. E00-B, no. 0, pp. 1-10, Feb. 2020.
+\end{thebibliography}
+
+\appendix
+\addcontentsline{toc}{section}{APPENDIX}
+
+\upLaTeX は，内部コードをUnicode化した \pLaTeX の拡張です．
+環境依存文字（丸囲み文字や特殊記号など）やJIS第一・第二水準以外の漢字（JIS外字）を安全に扱うことができます．
+
+\section{丸囲み文字や特殊記号の例}
+㊀㊁㊂㊃㊄㊅㊆㊇㊈㊉㊊㊋㊌㊍㊎㊏㊐㊑㊒㊓㊔㊕㊖㊗㊘㊙㊚㊛㊜㊝㊞㊟㊠㊡㊢㊣㊤㊥㊦㊧㊨㊩㊪㊫㊬㊭㊮㊯㊰
+㈠㈡㈢㈣㈤㈥㈦㈧㈨㈩㈪㈫㈬㈭㈮㈯㈰㈱㈲㈳㈴㈵㈶㈷㈸㈹㈺㈻㈼㈽㈾㈿㉀㉁㉂㉃
+㌀㌁㌂㌃㌄㌅㌆㌇㌈㌉㌊㌋㌌㌍㌎㌏㌐㌑㌒㌓㌔㌕㌖㌗㌘㌙㌚㌛㌜㌝㌞㌟㌠㌡㌢㌣㌤㌥㌦㌧㌨㌩㌪㌫
+
+\section{JIS第一・第二水準外の漢字（JIS外字）の例}
+俱𠀋㐂丨丯丰亍仡份仿伃伋你佈佉佖佟佪佬佾侊侔侗侮俉俠倁倂倎倘倧倮偀倻偁傔僌僲僐僦僧儆儃儋儞儵兊免兕
+兗㒵冝凃凊凞凢凮刁㓛刓刕剉剗剡劓勈勉勌勐勖勛勤勰勻匀匇匜卑卡卣卽厓厝厲吒吧呍咜呫呴呿咈咖咡𠂉丂丏丒
+㑪俲倀倐倓倜倞倢㑨偂偆偎偓偗偣偦偪偰傣傈傒傓傕傖傜傪𠌫傱傺傻僄僇僳僇僎𠍱僔僙僡僩㒒
+
+\end{document}

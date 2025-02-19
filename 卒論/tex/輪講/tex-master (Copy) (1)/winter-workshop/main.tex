@@ -1,0 +1,52 @@
+\documentclass[twocolumn,a4paper]{ieicejsp}
+\usepackage{ascmac}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{bm}
+\usepackage{paralist}
+\usepackage{nidanfloat}
+\usepackage{fancybox}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{comment}
+\usepackage[dvipdfmx]{color}
+\usepackage{caption}
+
+\renewcommand{\baselinestretch}{1.0}  % 奥の手
+\captionsetup[figure]{format=plain, labelformat=simple, labelsep=period, font=footnotesize}
+
+\title{\bf なにかいい感じのタイトルが入る\\
+\small{Something catchy headline here}}
+
+\author{
+    輪講　太郎 \\ Taro RINKOU
+}
+\affliate {
+    東京工業大学 \\ Tokyo Institute of Technology
+}
+
+\begin{document}
+\maketitle
+
+\section{はじめに}
+冬ゼミテンプレートです．
+図~\ref{fig:tech-chan}とか文献\cite{myself}とかは適宜置き換えてください．
+
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width=60mm]{tech-chan.png}
+  \caption{工大祭公式マスコットキャラクター}
+  \label{fig:tech-chan}
+\end{figure}
+
+\begin{thebibliography}{9}
+\footnotesize
+\bibitem{myself}
+輪講 太郎, 北口 善明, 山岡 克式, ``情報通信ネットワークに関する研究,'' 信学技報, vol. 120, no. 293, IN2020-99, pp. 13-18, 2020年12月.
+\end{thebibliography}
+
+\end{document}
