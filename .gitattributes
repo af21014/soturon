@@ -1,0 +1,3 @@
+*.eps binary
+*.tex text eol=lf
+*.sty text eol=lf
